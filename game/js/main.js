@@ -1,7 +1,8 @@
 // main.js — boots Sizzle & Serve and conducts the whole service: it owns the
 // game state, wires the counter bins and stations to the chef's walk, runs the
 // frame loop (clock, orders, stations, chef), renders everything, and stages
-// the frozen scenes the screenshots are taken from (?shot=cover|chop|serve|menu).
+// the frozen scenes the screenshots are taken from
+// (?shot=cover|rush|serve|results|menu).
 
 import { INGREDIENTS, RECIPES, STATE_NAMES, plateMatchesRecipe, prepStationFor, recipeById } from './recipes.js';
 import { createOrderBook, patienceFraction, updateOrders } from './orders.js';
@@ -438,7 +439,8 @@ if (shotName) {
   const ctx = { book, kitchen, score, chef, matchTicketId: null };
   stageShot(shotName, ctx);
   matchTicketId = ctx.matchTicketId;
-  if (shotName !== 'menu') $('overlay').classList.add('hidden');
+  if (shotName === 'results') endService(); // the day-summary screen is the scene
+  else if (shotName !== 'menu') $('overlay').classList.add('hidden');
   render();
   requestAnimationFrame(() => requestAnimationFrame(() => { window.__shotReady = true; }));
 } else {
