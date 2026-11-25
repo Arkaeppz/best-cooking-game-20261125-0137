@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sizzle &amp; Serve — Kitchen Rush</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="stage">
+  <header id="hud">
+    <div class="brand">SIZZLE <span class="brand-amp">&amp;</span> SERVE</div>
+    <div class="hud-box" id="hud-clock">
+      <label>SERVICE</label>
+      <strong id="clock-text">3:00</strong>
+      <div class="clock-track"><div id="clock-fill"></div></div>
+    </div>
+    <div class="hud-box"><label>SCORE</label><strong id="score-text">0</strong></div>
+    <div class="hud-box"><label>TILL</label><strong id="coins-text">$0</strong></div>
+    <div class="hud-box" id="hud-combo"><label>COMBO</label><strong id="combo-text">×1</strong></div>
+    <div class="hud-box"><label>SERVED</label><strong id="served-text">0</strong></div>
+    <div class="hud-box" id="hud-hearts"><label>CUSTOMERS</label><strong id="hearts-text">♥♥♥</strong></div>
+  </header>
+
+  <main id="layout">
+    <aside id="orders">
+      <h2>ORDER BOARD</h2>
+      <div id="tickets"></div>
+      <p id="orders-hint">Serve a ticket before its patience bar runs out.<br>
+      Keys: <b>1–7</b> counter · <b>B</b> board · <b>S</b> stove · <b>A</b> plate · <b>P</b> pass · <b>T</b> bin</p>
+    </aside>
+
+    <section id="kitchen">
+      <div id="pass-row">
+        <div class="station" id="station-pass" title="Serving pass">
+          <div class="station-label">SERVING PASS</div>
+          <div id="pass-plate"></div>
+          <div class="station-hint" id="pass-hint">click a finished plate here to serve it</div>
+        </div>
+        <div id="rush-meter">
+          <label>LUNCH RUSH</label>
+          <div class="rush-track"><div id="rush-fill"></div></div>
+          <div id="rush-text">doors open…</div>
+        </div>
+      </div>
+
+      <div id="stations-row">
+        <div class="station" id="station-board" title="Chopping board">
+          <div class="station-label">CHOPPING BOARD</div>
+          <div class="board-surface"><div id="board-item"></div><div id="board-progress"><div id="board-progress-fill"></div></div></div>
+          <div class="station-hint">tomato · lettuce · potato</div>
+        </div>
+        <div class="station" id="station-stove" title="Stove">
+          <div class="station-label">STOVE</div>
+          <div id="burners">
+            <div class="burner" id="burner-0"><div class="burner-item"></div><svg class="ring" viewBox="0 0 44 44"><circle class="ring-bg" cx="22" cy="22" r="19"></circle><circle class="ring-fill" cx="22" cy="22" r="19"></circle></svg></div>
+            <div class="burner" id="burner-1"><div class="burner-item"></div><svg class="ring" viewBox="0 0 44 44"><circle class="ring-bg" cx="22" cy="22" r="19"></circle><circle class="ring-fill" cx="22" cy="22" r="19"></circle></svg></div>
+          </div>
+          <div class="station-hint">patty · egg · cut potato — grab before it burns!</div>
+        </div>
+        <div class="station" id="station-assembly" title="Assembly counter">
+          <div class="station-label">ASSEMBLY</div>
+          <div id="plate-wrap"><div id="plate"></div></div>
+          <div class="station-hint">click the plate to send it to the pass</div>
+        </div>
+      </div>
+
+      <div id="counter">
+        <button class="bin" data-item="bun"><span class="bin-food" data-food="bun"></span><span class="bin-name">Bun</span><kbd>1</kbd></button>
+        <button class="bin" data-item="patty"><span class="bin-food" data-food="patty"></span><span class="bin-name">Patty</span><kbd>2</kbd></button>
+        <button class="bin" data-item="cheese"><span class="bin-food" data-food="cheese"></span><span class="bin-name">Cheese</span><kbd>3</kbd></button>
+        <button class="bin" data-item="tomato"><span class="bin-food" data-food="tomato"></span><span class="bin-name">Tomato</span><kbd>4</kbd></button>
+        <button class="bin" data-item="lettuce"><span class="bin-food" data-food="lettuce"></span><span class="bin-name">Lettuce</span><kbd>5</kbd></button>
+        <button class="bin" data-item="egg"><span class="bin-food" data-food="egg"></span><span class="bin-name">Egg</span><kbd>6</kbd></button>
+        <button class="bin" data-item="potato"><span class="bin-food" data-food="potato"></span><span class="bin-name">Potato</span><kbd>7</kbd></button>
+        <button class="bin bin-trash" id="bin-trash"><span class="bin-food trash-icon"></span><span class="bin-name">Bin</span><kbd>T</kbd></button>
+      </div>
+
+      <div id="floor">
+        <div id="chef">
+          <div class="chef-hat"></div>
+          <div class="chef-face"></div>
+          <div class="chef-body"></div>
+          <div id="chef-hands"></div>
+        </div>
+        <div id="floor-text">click a counter bin or a station — the chef walks there</div>
+      </div>
+    </section>
+  </main>
+
+  <div id="floaters"></div>
+  <div id="toast"></div>
+
+  <div id="overlay">
+    <div class="panel" id="screen-title">
+      <h1>SIZZLE <span class="brand-amp">&amp;</span> SERVE</h1>
+      <p class="tagline">A three-minute kitchen rush. Take the orders, work the stations, plate it right, serve it hot.</p>
+      <div id="menu-cards"></div>
+      <div class="howto">
+        <div><b>1 · GRAB</b>Click a counter bin — the chef fetches the ingredient.</div>
+        <div><b>2 · PREP</b>Chop tomato, lettuce and potato. Cook patties, eggs and cut potato — grab them before they burn.</div>
+        <div><b>3 · PLATE</b>Stack the dish on the assembly plate, send it to the pass, click the pass to serve.</div>
+      </div>
+      <button id="btn-start">START SERVICE</button>
+    </div>
+    <div class="panel hidden" id="screen-over">
+      <h1 id="over-title">SERVICE OVER</h1>
+      <p class="tagline" id="over-line">The last ticket is done.</p>
+      <div id="over-stats"></div>
+      <button id="btn-again">PLAY AGAIN</button>
+    </div>
+  </div>
+</div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
