@@ -144,11 +144,11 @@ html, body {
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
 }
 
-.ticket .patience { height: 8px; background: #e5d9c3; border-radius: 4px; overflow: hidden; }
-.ticket .patience-fill { height: 100%; background: var(--green); border-radius: 4px; }
-.ticket.hurry { border-top-color: var(--gold); }
+.ticket .patience { height: 10px; background: #e5d9c3; border-radius: 5px; overflow: hidden; }
+.ticket .patience-fill { height: 100%; background: var(--green); border-radius: 5px; }
+.ticket.hurry { border-top-color: var(--gold); background: #fff3d1; }
 .ticket.hurry .patience-fill { background: var(--gold); }
-.ticket.critical { border-top-color: var(--red); animation: ticket-shake 0.4s infinite; }
+.ticket.critical { border-top: 8px solid var(--red); background: #ffe0d8; animation: ticket-shake 0.4s infinite; }
 .ticket.critical .patience-fill { background: var(--red); }
 
 @keyframes ticket-shake {
@@ -204,7 +204,11 @@ html, body {
   position: relative;
 }
 
-.station-label { font-size: 13px; font-weight: 900; letter-spacing: 2px; text-align: center; color: var(--wood-dark); }
+.station-label {
+  font-size: 14px; font-weight: 900; letter-spacing: 2px; text-align: center;
+  color: var(--paper); background: var(--wood-dark);
+  align-self: center; padding: 3px 14px; border-radius: 999px;
+}
 .station-hint { font-size: 11px; text-align: center; opacity: 0.65; margin-top: auto; }
 .station.flash { animation: station-flash 0.3s; }
 @keyframes station-flash { 0% { background: #ffe9a8; } 100% { background: var(--paper); } }
@@ -380,7 +384,7 @@ html, body {
 /* ---------- Food, drawn in CSS ---------- */
 
 .food { position: relative; width: 58px; height: 44px; flex: none; }
-.bin-food { position: relative; width: 58px; height: 44px; display: block; transform: scale(0.92); }
+.bin-food { position: relative; width: 58px; height: 44px; display: block; transform: scale(1.06); }
 
 .food-bun { background: linear-gradient(180deg, #f0b45c 0 55%, #dd9435 56% 100%); border-radius: 26px 26px 10px 10px / 30px 30px 8px 8px; box-shadow: inset 0 -8px 0 rgba(146, 90, 20, 0.35); }
 .food-patty { background: radial-gradient(circle at 30% 35%, #a4713f 0 12%, transparent 13%), radial-gradient(circle at 65% 60%, #96652f 0 14%, transparent 15%), #8a5a33; border-radius: 12px; height: 30px; margin-top: 8px; }
