@@ -46,15 +46,19 @@ export function stageShot(name, ctx) {
     chef.targetX = 150;
   }
 
-  // The rush scene: the whole game in one frame — a Classic Burger ready at
-  // the pass (its ticket highlighted), a second ticket nearly out of
-  // patience, a Deluxe Burger half-stacked on the assembly plate, a patty
-  // mid-cook with its ring half gone, a fried egg resting done on the other
-  // burner, a potato mid-chop, and the chef carrying the next cheese slice
-  // while the combo sits at x2 and the clock shows the rush.
+  // The rush scene: the whole game in one frame — a full board of four
+  // tickets at four patience levels (a Classic Burger ready at the pass,
+  // its ticket highlighted; a Deluxe Burger — the one half-stacked on the
+  // assembly plate — in the gold hurry band; a Garden Salad running low;
+  // and a Sunrise Plate critical in red), a patty mid-cook with its ring
+  // half gone, a fried egg resting done on the other burner, a potato
+  // mid-chop, and the chef carrying the next cheese slice while the combo
+  // sits at x2 and the clock shows the rush.
   if (name === 'rush') {
     const ready = stageTicket(book, 'classic-burger', 0.62);
-    stageTicket(book, 'sunrise-plate', 0.18);
+    stageTicket(book, 'deluxe-burger', 0.44);
+    stageTicket(book, 'garden-salad', 0.28);
+    stageTicket(book, 'sunrise-plate', 0.14);
     kitchen.passPlate = ['bun', 'pattyCooked', 'cheese'];
     kitchen.plate = ['bun', 'pattyCooked'];
     kitchen.burners[0].item = 'patty';
