@@ -46,6 +46,45 @@ export function stageShot(name, ctx) {
     chef.targetX = 150;
   }
 
+  // The rush scene: the whole game in one frame — a Classic Burger ready at
+  // the pass (its ticket highlighted), a second ticket nearly out of
+  // patience, a Deluxe Burger half-stacked on the assembly plate, a patty
+  // mid-cook with its ring half gone, a fried egg resting done on the other
+  // burner, a potato mid-chop, and the chef carrying the next cheese slice
+  // while the combo sits at x2 and the clock shows the rush.
+  if (name === 'rush') {
+    const ready = stageTicket(book, 'classic-burger', 0.62);
+    stageTicket(book, 'sunrise-plate', 0.18);
+    kitchen.passPlate = ['bun', 'pattyCooked', 'cheese'];
+    kitchen.plate = ['bun', 'pattyCooked'];
+    kitchen.burners[0].item = 'patty';
+    kitchen.burners[0].phase = 'cooking';
+    kitchen.burners[0].progress = 0.55;
+    kitchen.burners[1].item = 'eggFried';
+    kitchen.burners[1].phase = 'done';
+    kitchen.burners[1].progress = 0.2;
+    kitchen.board.item = 'potato';
+    kitchen.board.progress = 0.5;
+    chef.carrying = 'cheese';
+    chef.x = 800; // floor-relative: in front of the assembly counter
+    chef.targetX = 800;
+    ctx.matchTicketId = ready.id;
+  }
+
+  // The results scene: the day is over and the summary screen (shown by
+  // main.js for this shot) counts a strong service — a full till, a long
+  // served list and a x3 best combo, with one heart lost along the way.
+  if (name === 'results') {
+    score.elapsed = 180;
+    score.points = 1240;
+    score.coins = 412;
+    score.served = 19;
+    score.combo = 4;
+    score.bestCombo = 4;
+    score.hearts = 2;
+    score.lost = 1;
+  }
+
   if (name === 'serve') {
     const ticket = stageTicket(book, 'classic-burger', 0.66);
     stageTicket(book, 'deluxe-burger', 0.38);
